@@ -15,10 +15,13 @@ export class RaceListComponent implements OnInit, OnDestroy {
   constructor(private raceService: RaceService) {
   }
 
+  onNewRace() {
+
+  }
+
   ngOnInit() {
     this.subscription = this.raceService.racesChanged
       .subscribe((races: Race[]) => {
-        console.log('waddup');
         this.races = races;
       });
     this.raceService.getRaces();
