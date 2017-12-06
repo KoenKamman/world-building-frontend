@@ -3,6 +3,7 @@ import {Race} from '../shared/race.model';
 import {Http} from '@angular/http';
 import {environment} from '../../environments/environment';
 import {Injectable} from '@angular/core';
+import {Headers} from '@angular/http';
 
 @Injectable()
 export class RaceService {
