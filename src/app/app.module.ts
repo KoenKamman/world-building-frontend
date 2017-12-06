@@ -12,6 +12,10 @@ import {AdventuresComponent} from './adventures/adventures.component';
 import {RacesComponent} from './races/races.component';
 import {AppRoutingModule} from './app-routing.module';
 import { HomeComponent } from './home/home.component';
+import { RaceListComponent } from './races/race-list/race-list.component';
+import { RaceItemComponent } from './races/race-list/race-item/race-item.component';
+import {RaceService} from './races/race.service';
+import {HttpModule} from "@angular/http";
 
 @NgModule({
   declarations: [
@@ -22,14 +26,17 @@ import { HomeComponent } from './home/home.component';
     LocationsComponent,
     AdventuresComponent,
     RacesComponent,
-    HomeComponent
+    HomeComponent,
+    RaceListComponent,
+    RaceItemComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
+    HttpModule,
     AppRoutingModule
   ],
-  providers: [],
+  providers: [RaceService],
   bootstrap: [AppComponent]
 })
 export class AppModule {
