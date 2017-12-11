@@ -1,0 +1,38 @@
+<div *ngIf="race !== undefined">
+  <div class="row">
+    <div class="col-xs-12">
+      <div class="pull-right">
+        <button class="btn btn-warning">Edit Race</button>
+        <button class="btn btn-danger" (click)="onDeleteRace()">Delete Race</button>
+      </div>
+    </div>
+  </div>
+  <hr>
+</div>
+<div class="content-block" *ngIf="race !== undefined">
+  <div class="row">
+    <div class="col-xs-12">
+      <h1>{{ race.name }}</h1>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-12">
+      <p>{{ race.description }}</p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-12">
+      <p>Strength {{ race.strength_mod }}</p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-12">
+      <p>Agility {{ race.agility_mod }}</p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-12">
+      <p>Intelligence {{ race.intelligence_mod }}</p>
+    </div>
+  </div>
+</div>

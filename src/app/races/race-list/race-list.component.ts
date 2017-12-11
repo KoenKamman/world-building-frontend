@@ -1,7 +1,7 @@
 import {Component, OnInit, OnDestroy} from '@angular/core';
 import {Subscription} from 'rxjs/Subscription';
 import {Race} from '../../shared/race.model';
-import {RaceService} from '../race.service';
+import {RaceService} from '../../shared/race.service';
 
 @Component({
   selector: 'app-race-list',

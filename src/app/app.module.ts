@@ -14,8 +14,9 @@ import {AppRoutingModule} from './app-routing.module';
 import { HomeComponent } from './home/home.component';
 import { RaceListComponent } from './races/race-list/race-list.component';
 import { RaceItemComponent } from './races/race-list/race-item/race-item.component';
-import {RaceService} from './races/race.service';
+import {RaceService} from './shared/race.service';
 import {HttpModule} from "@angular/http";
+import { RaceDetailComponent } from './races/race-detail/race-detail.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import {HttpModule} from "@angular/http";
     RacesComponent,
     HomeComponent,
     RaceListComponent,
-    RaceItemComponent
+    RaceItemComponent,
+    RaceDetailComponent
   ],
   imports: [
     BrowserModule,
