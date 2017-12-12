@@ -19,6 +19,16 @@ import {HttpModule} from '@angular/http';
 import {RaceDetailComponent} from './races/race-detail/race-detail.component';
 import {StatbarDirective} from './shared/statbar.directive';
 import {RaceEditComponent} from './races/race-edit/race-edit.component';
+import {CharacterListComponent} from './characters/character-list/character-list.component';
+import {CharacterDetailComponent} from './characters/character-detail/character-detail.component';
+import {CharacterEditComponent} from './characters/character-edit/character-edit.component';
+import {CharacterItemComponent} from './characters/character-list/character-item/character-item.component';
+import {CharacterService} from './shared/character.service';
+import {AdventureListComponent} from './adventures/adventure-list/adventure-list.component';
+import {AdventureEditComponent} from './adventures/adventure-edit/adventure-edit.component';
+import {AdventureDetailComponent} from './adventures/adventure-detail/adventure-detail.component';
+import {AdventureItemComponent} from './adventures/adventure-list/adventure-item/adventure-item.component';
+import {AdventureService} from './shared/adventure.service';
 
 @NgModule({
   declarations: [
@@ -34,7 +44,15 @@ import {RaceEditComponent} from './races/race-edit/race-edit.component';
     RaceItemComponent,
     RaceDetailComponent,
     StatbarDirective,
-    RaceEditComponent
+    RaceEditComponent,
+    CharacterListComponent,
+    CharacterDetailComponent,
+    CharacterEditComponent,
+    CharacterItemComponent,
+    AdventureListComponent,
+    AdventureEditComponent,
+    AdventureDetailComponent,
+    AdventureItemComponent
   ],
   imports: [
     BrowserModule,
@@ -42,7 +60,7 @@ import {RaceEditComponent} from './races/race-edit/race-edit.component';
     HttpModule,
     AppRoutingModule
   ],
-  providers: [RaceService],
+  providers: [RaceService, CharacterService, AdventureService],
   bootstrap: [AppComponent]
 })
 export class AppModule {
