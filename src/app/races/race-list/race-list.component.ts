@@ -18,10 +18,6 @@ export class RaceListComponent implements OnInit, OnDestroy {
               private route: ActivatedRoute) {
   }
 
-  onNewRace() {
-
-  }
-
   ngOnInit() {
     this.subscription = this.raceService.racesChanged
       .subscribe((races: Race[]) => {
