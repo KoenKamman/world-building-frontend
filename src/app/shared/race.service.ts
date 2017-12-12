@@ -55,12 +55,13 @@ export class RaceService {
   }
 
   addRace(race: Race) {
-    this.http.post(this.serverUrl, race, {headers: this.headers})
+    return this.http.post(this.serverUrl, race, {headers: this.headers})
       .toPromise()
       .then((result) => {
         this.races.push(result.json());
         this.setRaces(this.races);
         console.log('Created race with MongoID: ' + result.json()._id);
+        return result;
       })
       .catch((error) => {
         console.log(error);

@@ -64,13 +64,19 @@ export class RaceEditComponent implements OnInit, OnDestroy {
     if (this.editMode) {
       this.raceService.updateRace(this.id, this.raceForm.value)
         .then(() => {
-          this.router.navigate(['/races'])
+          this.router.navigate(['/races/' + this.id])
             .catch((error) => {
               console.log(error);
             });
         });
     } else {
-      this.raceService.addRace(this.raceForm.value);
+      this.raceService.addRace(this.raceForm.value)
+        .then((result) => {
+          this.router.navigate(['/races/' + result.json()._id])
+            .catch((error) => {
+              console.log(error);
+            });
+        });
     }
   }
 
@@ -86,9 +92,9 @@ export class RaceEditComponent implements OnInit, OnDestroy {
     this.raceForm = new FormGroup({
       'name': new FormControl(this.raceName, Validators.required),
       'description': new FormControl(this.raceDesc, Validators.required),
-      'strength_mod': new FormControl(this.raceStr, [Validators.required, Validators.pattern(/^[0-9]+[0-9]*$/)]),
-      'agility_mod': new FormControl(this.raceAgi, [Validators.required, Validators.pattern(/^[0-9]+[0-9]*$/)]),
-      'intelligence_mod': new FormControl(this.raceInt, [Validators.required, Validators.pattern(/^[0-9]+[0-9]*$/)])
+      'strength_mod': new FormControl(this.raceStr, [Validators.required, Validators.pattern(/^[1-9]+[0-9]*$/)]),
+      'agility_mod': new FormControl(this.raceAgi, [Validators.required, Validators.pattern(/^[1-9]+[0-9]*$/)]),
+      'intelligence_mod': new FormControl(this.raceInt, [Validators.required, Validators.pattern(/^[1-9]+[0-9]*$/)])
     });
   }
 
