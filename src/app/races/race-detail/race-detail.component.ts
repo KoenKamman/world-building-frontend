@@ -10,7 +10,7 @@ import {Subscription} from 'rxjs/Subscription';
   styleUrls: ['./race-detail.component.css']
 })
 export class RaceDetailComponent implements OnInit, OnDestroy {
-  private race: Race = new Race('', '', 0, 0, 0);
+  race: Race = new Race('', '', 0, 0, 0);
   private id: string;
   private subscription: Subscription;
 

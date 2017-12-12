@@ -10,8 +10,8 @@ import {ActivatedRoute, Router} from '@angular/router';
   styleUrls: ['./race-list.component.css']
 })
 export class RaceListComponent implements OnInit, OnDestroy {
-  private races: Race[];
-  private subscription: Subscription;
+  races: Race[];
+  subscription: Subscription;
 
   constructor(private raceService: RaceService,
               private router: Router,

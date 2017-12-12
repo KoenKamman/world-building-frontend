@@ -12,7 +12,7 @@ import {RaceService} from '../../shared/race.service';
 export class RaceEditComponent implements OnInit, OnDestroy {
   private id: string;
   private editMode = false;
-  private raceForm: FormGroup;
+  raceForm: FormGroup;
   private subscription: Subscription;
 
   private raceName = '';
@@ -72,6 +72,13 @@ export class RaceEditComponent implements OnInit, OnDestroy {
     } else {
       this.raceService.addRace(this.raceForm.value);
     }
+  }
+
+  onCancel() {
+    this.router.navigate(['/races/' + this.id])
+      .catch((error) => {
+        console.log(error);
+      });
   }
 
   private initForm() {
