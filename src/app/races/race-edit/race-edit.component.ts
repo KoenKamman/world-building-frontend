@@ -71,8 +71,8 @@ export class RaceEditComponent implements OnInit, OnDestroy {
         });
     } else {
       this.raceService.addRace(this.raceForm.value)
-        .then((result) => {
-          this.router.navigate(['/races/' + result.json()._id])
+        .then((result: Response) => {
+          this.router.navigate(['/races/' + result.json()['_id']])
             .catch((error) => {
               console.log(error);
             });

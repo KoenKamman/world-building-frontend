@@ -24,7 +24,7 @@ export class RaceDetailComponent implements OnInit, OnDestroy {
       .subscribe((params: Params) => {
         this.id = params['id'];
         if (this.raceService.getRace(this.id) === undefined) {
-          const sub2 = this.raceService.racesChanged.subscribe(() => {
+          this.raceService.racesChanged.subscribe(() => {
             this.race = this.raceService.getRace(this.id);
           });
         } else {
