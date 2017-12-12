@@ -5,7 +5,7 @@ import {Directive, ElementRef, HostBinding, Input, OnChanges} from '@angular/cor
 })
 export class StatbarDirective implements OnChanges {
   @Input('type') type: string;
-  @Input('mod') mod: string;
+  @Input('mod') mod: number;
 
 
   @HostBinding('class.progress-bar') private progress = true;
