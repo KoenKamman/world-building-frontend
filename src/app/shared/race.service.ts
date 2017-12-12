@@ -1,6 +1,6 @@
 import {Subject} from 'rxjs/Subject';
 import {Race} from './race.model';
-import {Http} from '@angular/http';
+import {Http, Response} from '@angular/http';
 import {environment} from '../../environments/environment';
 import {Injectable} from '@angular/core';
 import {Headers} from '@angular/http';
@@ -44,10 +44,11 @@ export class RaceService {
   deleteRace(id: string, race: Race) {
     this.http.delete(this.serverUrl + '/' + id, {headers: this.headers})
       .toPromise()
-      .then((result) => {
+      .then((result: Response) => {
         this.races.splice(this.races.indexOf(race), 1);
         this.setRaces(this.races);
         console.log('Deleted race with MongoID: ' + id);
+        return result;
       })
       .catch((error) => {
         console.log(error);
@@ -72,11 +73,9 @@ export class RaceService {
     return this.http.put(this.serverUrl + '/' + id, race, {headers: this.headers})
       .toPromise()
       .then((result) => {
-        const response: Response = result;
         this.races[this.races.indexOf(this.getRace(id))] = result.json();
         this.setRaces(this.races);
         console.log('Updated race with MongoID: ' + result.json()._id);
-        return response;
       })
       .catch((error) => {
         console.log(error);
