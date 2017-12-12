@@ -72,9 +72,11 @@ export class RaceService {
     return this.http.put(this.serverUrl + '/' + id, race, {headers: this.headers})
       .toPromise()
       .then((result) => {
+        const response: Response = result;
         this.races[this.races.indexOf(this.getRace(id))] = result.json();
         this.setRaces(this.races);
         console.log('Updated race with MongoID: ' + result.json()._id);
+        return response;
       })
       .catch((error) => {
         console.log(error);
