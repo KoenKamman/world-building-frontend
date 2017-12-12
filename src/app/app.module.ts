@@ -17,6 +17,7 @@ import { RaceItemComponent } from './races/race-list/race-item/race-item.compone
 import {RaceService} from './shared/race.service';
 import {HttpModule} from "@angular/http";
 import { RaceDetailComponent } from './races/race-detail/race-detail.component';
+import { StatbarDirective } from './shared/statbar.directive';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import { RaceDetailComponent } from './races/race-detail/race-detail.component';
     HomeComponent,
     RaceListComponent,
     RaceItemComponent,
-    RaceDetailComponent
+    RaceDetailComponent,
+    StatbarDirective
   ],
   imports: [
     BrowserModule,
