@@ -2,6 +2,7 @@ import {Component, OnInit, OnDestroy} from '@angular/core';
 import {Subscription} from 'rxjs/Subscription';
 import {Race} from '../../shared/race.model';
 import {RaceService} from '../../shared/race.service';
+import {ActivatedRoute, Router} from '@angular/router';
 
 @Component({
   selector: 'app-race-list',
@@ -9,10 +10,12 @@ import {RaceService} from '../../shared/race.service';
   styleUrls: ['./race-list.component.css']
 })
 export class RaceListComponent implements OnInit, OnDestroy {
-  races: Race[];
-  subscription: Subscription;
+  private races: Race[];
+  private subscription: Subscription;
 
-  constructor(private raceService: RaceService) {
+  constructor(private raceService: RaceService,
+              private router: Router,
+              private route: ActivatedRoute) {
   }
 
   onNewRace() {
@@ -29,6 +32,13 @@ export class RaceListComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this.subscription.unsubscribe();
+  }
+
+  onNewRace() {
+    this.router.navigate(['new'], {relativeTo: this.route})
+      .catch((error) => {
+        console.log(error);
+      });
   }
 
 }

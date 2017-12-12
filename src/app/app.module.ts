@@ -3,7 +3,7 @@ import {NgModule} from '@angular/core';
 
 
 import {AppComponent} from './app.component';
-import {FormsModule} from '@angular/forms';
+import {ReactiveFormsModule} from '@angular/forms';
 import {HeaderComponent} from './header/header.component';
 import {AccountComponent} from './account/account.component';
 import {CharactersComponent} from './characters/characters.component';
@@ -11,13 +11,14 @@ import {LocationsComponent} from './locations/locations.component';
 import {AdventuresComponent} from './adventures/adventures.component';
 import {RacesComponent} from './races/races.component';
 import {AppRoutingModule} from './app-routing.module';
-import { HomeComponent } from './home/home.component';
-import { RaceListComponent } from './races/race-list/race-list.component';
-import { RaceItemComponent } from './races/race-list/race-item/race-item.component';
+import {HomeComponent} from './home/home.component';
+import {RaceListComponent} from './races/race-list/race-list.component';
+import {RaceItemComponent} from './races/race-list/race-item/race-item.component';
 import {RaceService} from './shared/race.service';
-import {HttpModule} from "@angular/http";
-import { RaceDetailComponent } from './races/race-detail/race-detail.component';
-import { StatbarDirective } from './shared/statbar.directive';
+import {HttpModule} from '@angular/http';
+import {RaceDetailComponent} from './races/race-detail/race-detail.component';
+import {StatbarDirective} from './shared/statbar.directive';
+import {RaceEditComponent} from './races/race-edit/race-edit.component';
 
 @NgModule({
   declarations: [
@@ -32,11 +33,12 @@ import { StatbarDirective } from './shared/statbar.directive';
     RaceListComponent,
     RaceItemComponent,
     RaceDetailComponent,
-    StatbarDirective
+    StatbarDirective,
+    RaceEditComponent
   ],
   imports: [
     BrowserModule,
-    FormsModule,
+    ReactiveFormsModule,
     HttpModule,
     AppRoutingModule
   ],

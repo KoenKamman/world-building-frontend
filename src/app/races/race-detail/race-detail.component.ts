@@ -10,9 +10,9 @@ import {Subscription} from 'rxjs/Subscription';
   styleUrls: ['./race-detail.component.css']
 })
 export class RaceDetailComponent implements OnInit, OnDestroy {
-  race: Race = new Race('', '', 0, 0, 0);
-  id: number;
-  subscription: Subscription;
+  private race: Race = new Race('', '', 0, 0, 0);
+  private id: string;
+  private subscription: Subscription;
 
   constructor(private raceService: RaceService,
               private route: ActivatedRoute,
@@ -22,9 +22,9 @@ export class RaceDetailComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.subscription = this.route.params
       .subscribe((params: Params) => {
-        this.id = +params['id'];
+        this.id = params['id'];
         if (this.raceService.getRace(this.id) === undefined) {
-          this.raceService.racesChanged.subscribe(() => {
+          const sub2 = this.raceService.racesChanged.subscribe(() => {
             this.race = this.raceService.getRace(this.id);
           });
         } else {
@@ -38,8 +38,15 @@ export class RaceDetailComponent implements OnInit, OnDestroy {
   }
 
   onDeleteRace() {
-    this.raceService.deleteRace(this.id, this.race['_id']);
+    this.raceService.deleteRace(this.id, this.race);
     this.router.navigate(['/races'])
+      .catch((error) => {
+        console.log(error);
+      });
+  }
+
+  onEditRace() {
+    this.router.navigate(['edit'], {relativeTo: this.route})
       .catch((error) => {
         console.log(error);
       });

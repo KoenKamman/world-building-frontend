@@ -2,42 +2,42 @@
   <div class="row">
     <div class="col-xs-12">
       <div class="pull-right">
-        <button class="btn btn-warning">Edit Race</button>
-        <button class="btn btn-danger" (click)="onDeleteRace()">Delete Race</button>
+        <button class="btn btn-warning" (click)="onEditRace()">Edit</button>
+        <button class="btn btn-danger" (click)="onDeleteRace()">Delete</button>
       </div>
     </div>
   </div>
   <hr>
-</div>
-<div class="content-block" *ngIf="race !== undefined">
-  <div class="row">
-    <div class="col-xs-12">
-      <h1>{{ race.name }}</h1>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-xs-12">
-      <p>{{ race.description }}</p>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-xs-12">
-      <div class="progress">
-        <div appStatbar [type]="'Strength'" [mod]="race.strength_mod"></div>
+  <div class="content-block">
+    <div class="row">
+      <div class="col-xs-12">
+        <h1>{{ race.name }}</h1>
       </div>
     </div>
-  </div>
-  <div class="row">
-    <div class="col-xs-12">
-      <div class="progress">
-        <div appStatbar [type]="'Agility'" [mod]="race.agility_mod"></div>
+    <div class="row">
+      <div class="col-xs-12">
+        <p>{{ race.description }}</p>
       </div>
     </div>
-  </div>
-  <div class="row">
-    <div class="col-xs-12">
-      <div class="progress">
-        <div appStatbar [type]="'Intelligence'" [mod]="race.intelligence_mod"></div>
+    <div class="row">
+      <div class="col-xs-12">
+        <div class="progress">
+          <div appStatbar [type]="'Strength'" [mod]="race.strength_mod"></div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-xs-12">
+        <div class="progress">
+          <div appStatbar [type]="'Agility'" [mod]="race.agility_mod"></div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-xs-12">
+        <div class="progress">
+          <div appStatbar [type]="'Intelligence'" [mod]="race.intelligence_mod"></div>
+        </div>
       </div>
     </div>
   </div>

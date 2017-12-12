@@ -7,6 +7,7 @@ import {AccountComponent} from './account/account.component';
 import {RouterModule, Routes} from '@angular/router';
 import {HomeComponent} from './home/home.component';
 import {RaceDetailComponent} from './races/race-detail/race-detail.component';
+import {RaceEditComponent} from './races/race-edit/race-edit.component';
 
 const appRoutes: Routes = [
   {path: '', component: HomeComponent},
@@ -15,7 +16,9 @@ const appRoutes: Routes = [
   {path: 'characters', component: CharactersComponent},
   {path: 'adventures', component: AdventuresComponent},
   {path: 'races', component: RacesComponent, children: [
-    {path: ':id', component: RaceDetailComponent}
+    {path: 'new', component: RaceEditComponent},
+    {path: ':id', component: RaceDetailComponent},
+    {path: ':id/edit', component: RaceEditComponent}
   ] },
   {path: '**', redirectTo: ''}
 ];

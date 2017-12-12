@@ -32,17 +32,48 @@ export class RaceService {
       });
   }
 
-  getRace(index: number) {
-    return this.races[index];
+  getRace(index: string) {
+    for (let i = 0, racesLength = this.races.length; i < racesLength; i++) {
+      if (this.races[i]['_id'] === index) {
+        return this.races[i];
+      }
+    }
+    return undefined;
   }
 
-  deleteRace(index: number, id: string) {
+  deleteRace(id: string, race: Race) {
     this.http.delete(this.serverUrl + '/' + id, {headers: this.headers})
       .toPromise()
-      .then((race) => {
-        this.races.splice(index, 1);
+      .then((result) => {
+        this.races.splice(this.races.indexOf(race), 1);
         this.setRaces(this.races);
         console.log('Deleted race with MongoID: ' + id);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }
+
+  addRace(race: Race) {
+    this.http.post(this.serverUrl, race, {headers: this.headers})
+      .toPromise()
+      .then((result) => {
+        this.races.push(result.json());
+        this.setRaces(this.races);
+        console.log('Created race with MongoID: ' + result.json()._id);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }
+
+  updateRace(id: string, race: Race) {
+    return this.http.put(this.serverUrl + '/' + id, race, {headers: this.headers})
+      .toPromise()
+      .then((result) => {
+        this.races[this.races.indexOf(this.getRace(id))] = result.json();
+        this.setRaces(this.races);
+        console.log('Updated race with MongoID: ' + result.json()._id);
       })
       .catch((error) => {
         console.log(error);
