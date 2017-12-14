@@ -59,7 +59,7 @@ export class AdventureService implements ResourceService {
       });
   }
 
-  addOne(adventure: Adventure): Promise<Object> {
+  addOne(adventure: Adventure): Promise<void | Response> {
     return this.http.post(this.serverUrl, adventure, {headers: this.headers})
       .toPromise()
       .then((result) => {
@@ -73,7 +73,7 @@ export class AdventureService implements ResourceService {
       });
   }
 
-  updateOne(id: string, adventure: Adventure): Promise<Object> {
+  updateOne(id: string, adventure: Adventure): Promise<void> {
     return this.http.put(this.serverUrl + '/' + id, adventure, {headers: this.headers})
       .toPromise()
       .then((result) => {

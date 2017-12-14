@@ -59,7 +59,7 @@ export class CharacterService implements ResourceService {
       });
   }
 
-  addOne(character: Character): Promise<Object> {
+  addOne(character: Character): Promise<void | Response> {
     return this.http.post(this.serverUrl, character, {headers: this.headers})
       .toPromise()
       .then((result) => {
@@ -73,7 +73,7 @@ export class CharacterService implements ResourceService {
       });
   }
 
-  updateOne(id: string, character: Character): Promise<Object> {
+  updateOne(id: string, character: Character): Promise<void> {
     return this.http.put(this.serverUrl + '/' + id, character, {headers: this.headers})
       .toPromise()
       .then((result) => {
