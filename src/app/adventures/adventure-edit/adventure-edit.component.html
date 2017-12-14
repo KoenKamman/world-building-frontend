@@ -39,7 +39,7 @@
       <div class="col-xs-12">
         <!--<div class="form-group">-->
         <label>Character</label>
-        <select [(ngModel)]="adventureCharacters" [ngModelOptions]="{standalone: true}" (ngModelChange)="onChange($event)">
+        <select [(ngModel)]="adventureCharacter" [ngModelOptions]="{standalone: true}" (ngModelChange)="onChange($event)">
           <option *ngFor="let advEl of characters" [ngValue]="advEl"> {{advEl.name}} </option>
         </select>
         <!--<select id="race" formControlName="race" class="form-control" (change)="onSelect($event.target.value)">-->
