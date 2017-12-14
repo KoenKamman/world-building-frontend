@@ -6,6 +6,7 @@ import {ActivatedRoute, Params, Router} from '@angular/router';
 import {AdventureService} from '../../shared/services/adventure.service';
 import {CharacterService} from '../../shared/services/character.service';
 import {Character} from '../../shared/models/character.model';
+import {Response} from "@angular/http";
 
 @Component({
   selector: 'app-adventure-edit',
@@ -93,8 +94,8 @@ export class AdventureEditComponent implements OnInit, OnDestroy {
         });
     } else {
       this.adventureService.addOne(this.adventureForm.value)
-        .then((result) => {
-          this.router.navigate(['/adventures/' + result._id])
+        .then((result: Response) => {
+          this.router.navigate(['/adventures/' + result.json()['_id']])
             .catch((error) => {
               console.log(error);
             });

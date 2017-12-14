@@ -5,6 +5,7 @@ import {ActivatedRoute, Params, Router} from '@angular/router';
 import {CharacterService} from '../../shared/services/character.service';
 import {Race} from '../../shared/models/race.model';
 import {RaceService} from '../../shared/services/race.service';
+import {Response} from "@angular/http";
 
 @Component({
   selector: 'app-character-edit',
@@ -92,8 +93,8 @@ export class CharacterEditComponent implements OnInit, OnDestroy {
         });
     } else {
       this.characterService.addOne(this.characterForm.value)
-        .then((result) => {
-          this.router.navigate(['/characters/' + result._id])
+        .then((result: Response) => {
+          this.router.navigate(['/characters/' + result.json()['_id']])
             .catch((error) => {
               console.log(error);
             });
