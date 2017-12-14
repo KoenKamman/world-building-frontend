@@ -21,7 +21,7 @@
     </div>
     <div class="row">
       <div class="col-xs-12">
-        <p>Race: <a [routerLink]="['../../races/' + character.race['_id']]">{{ character.race.name }}</a></p>
+        <p>Race: <a *ngIf="character.race !== null" [routerLink]="['../../races/' + character.race['_id']]">{{ character.race.name }}</a></p>
       </div>
     </div>
     <div class="row">
