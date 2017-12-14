@@ -66,7 +66,7 @@ export class AdventureService implements ResourceService {
         this.adventures.push(result.json());
         this.setAll(this.adventures);
         console.log('Created adventure with MongoID: ' + result.json()._id);
-        return result;
+        return result.json();
       })
       .catch((error) => {
         console.log(error);
