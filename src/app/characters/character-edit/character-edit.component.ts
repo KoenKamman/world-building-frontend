@@ -92,7 +92,7 @@ export class CharacterEditComponent implements OnInit, OnDestroy {
         });
     } else {
       this.characterService.addOne(this.characterForm.value)
-        .then((result: Response) => {
+        .then((result) => {
           this.router.navigate(['/characters/' + result.json()['_id']])
             .catch((error) => {
               console.log(error);
