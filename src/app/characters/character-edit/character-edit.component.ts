@@ -22,7 +22,7 @@ export class CharacterEditComponent implements OnInit, OnDestroy {
   private characterName = '';
   private characterDesc = '';
   private characterXp = 0;
-  private characterRace = undefined;
+  characterRace = undefined;
 
   constructor(private route: ActivatedRoute,
               private characterService: CharacterService,
