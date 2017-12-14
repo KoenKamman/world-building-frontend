@@ -1,8 +1,8 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {Subscription} from 'rxjs/Subscription';
-import {Character} from '../../shared/character.model';
-import {Race} from '../../shared/race.model';
-import {CharacterService} from '../../shared/character.service';
+import {Character} from '../../shared/models/character.model';
+import {Race} from '../../shared/models/race.model';
+import {CharacterService} from '../../shared/services/character.service';
 import {ActivatedRoute, Params, Router} from '@angular/router';
 
 @Component({
@@ -24,12 +24,12 @@ export class CharacterDetailComponent implements OnInit, OnDestroy {
     this.subscription = this.route.params
       .subscribe((params: Params) => {
         this.id = params['id'];
-        if (this.characterService.getCharacter(this.id) === undefined) {
-          this.characterService.charactersChanged.subscribe(() => {
-            this.character = this.characterService.getCharacter(this.id);
+        if (this.characterService.getOne(this.id) === undefined) {
+          this.characterService.getChanged().subscribe(() => {
+            this.character = this.characterService.getOne(this.id);
           });
         } else {
-          this.character = this.characterService.getCharacter(this.id);
+          this.character = this.characterService.getOne(this.id);
         }
       });
   }
@@ -39,7 +39,7 @@ export class CharacterDetailComponent implements OnInit, OnDestroy {
   }
 
   onDeleteCharacter() {
-    this.characterService.deleteCharacter(this.id, this.character);
+    this.characterService.deleteOne(this.id, this.character);
     this.router.navigate(['/races'])
       .catch((error) => {
         console.log(error);

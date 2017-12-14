@@ -1,10 +1,10 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {AdventureService} from '../../shared/adventure.service';
+import {AdventureService} from '../../shared/services/adventure.service';
 import {ActivatedRoute, Params, Router} from '@angular/router';
-import {Adventure} from '../../shared/adventure.model';
+import {Adventure} from '../../shared/models/adventure.model';
 import {Subscription} from 'rxjs/Subscription';
-import {Character} from '../../shared/character.model';
-import {Race} from '../../shared/race.model';
+import {Character} from '../../shared/models/character.model';
+import {Race} from '../../shared/models/race.model';
 
 @Component({
   selector: 'app-adventure-detail',
@@ -25,12 +25,12 @@ export class AdventureDetailComponent implements OnInit, OnDestroy {
     this.subscription = this.route.params
       .subscribe((params: Params) => {
         this.id = params['id'];
-        if (this.adventureService.getAdventure(this.id) === undefined) {
-          this.adventureService.adventuresChanged.subscribe(() => {
-            this.adventure = this.adventureService.getAdventure(this.id);
+        if (this.adventureService.getOne(this.id) === undefined) {
+          this.adventureService.getChanged().subscribe(() => {
+            this.adventure = this.adventureService.getOne(this.id);
           });
         } else {
-          this.adventure = this.adventureService.getAdventure(this.id);
+          this.adventure = this.adventureService.getOne(this.id);
         }
       });
   }
@@ -40,7 +40,7 @@ export class AdventureDetailComponent implements OnInit, OnDestroy {
   }
 
   onDeleteAdventure() {
-    this.adventureService.deleteAdventure(this.id, this.adventure);
+    this.adventureService.deleteOne(this.id, this.adventure);
     this.router.navigate(['/adventures'])
       .catch((error) => {
         console.log(error);

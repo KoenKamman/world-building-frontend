@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {Adventure} from '../../../shared/adventure.model';
+import {Adventure} from '../../../shared/models/adventure.model';
 
 @Component({
   selector: 'app-adventure-item',

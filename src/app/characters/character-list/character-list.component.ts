@@ -1,7 +1,7 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {Subscription} from 'rxjs/Subscription';
-import {Character} from '../../shared/character.model';
-import {CharacterService} from '../../shared/character.service';
+import {Character} from '../../shared/models/character.model';
+import {CharacterService} from '../../shared/services/character.service';
 import {ActivatedRoute, Router} from '@angular/router';
 
 @Component({
@@ -19,11 +19,11 @@ export class CharacterListComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.subscription = this.characterService.charactersChanged
+    this.subscription = this.characterService.getChanged()
       .subscribe((races: Character[]) => {
         this.characters = races;
       });
-    this.characterService.getCharacters();
+    this.characterService.getAll();
   }
 
   ngOnDestroy() {

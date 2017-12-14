@@ -1,7 +1,7 @@
 import {Component, OnInit, OnDestroy} from '@angular/core';
 import {Subscription} from 'rxjs/Subscription';
-import {Race} from '../../shared/race.model';
-import {RaceService} from '../../shared/race.service';
+import {Race} from '../../shared/models/race.model';
+import {RaceService} from '../../shared/services/race.service';
 import {ActivatedRoute, Router} from '@angular/router';
 
 @Component({
@@ -19,11 +19,11 @@ export class RaceListComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.subscription = this.raceService.racesChanged
+    this.subscription = this.raceService.getChanged()
       .subscribe((races: Race[]) => {
         this.races = races;
       });
-    this.raceService.getRaces();
+    this.raceService.getAll();
   }
 
   ngOnDestroy() {

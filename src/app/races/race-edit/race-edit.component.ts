@@ -2,8 +2,8 @@ import {Component, OnInit, OnDestroy} from '@angular/core';
 import {ActivatedRoute, Params, Router} from '@angular/router';
 import {FormGroup, FormControl, Validators} from '@angular/forms';
 import {Subscription} from 'rxjs/Subscription';
-import {RaceService} from '../../shared/race.service';
-import {Response} from "@angular/http";
+import {RaceService} from '../../shared/services/race.service';
+import {Response} from '@angular/http';
 
 @Component({
   selector: 'app-race-edit',
@@ -34,10 +34,9 @@ export class RaceEditComponent implements OnInit, OnDestroy {
           this.id = params['id'];
           this.editMode = params['id'] != null;
           if (this.editMode) {
-            if (this.raceService.getRace(this.id) === undefined) {
-              this.raceService.racesChanged.subscribe(() => {
+            if (this.raceService.getOne(this.id) === undefined) {
+              this.raceService.getChanged().subscribe(() => {
                 this.getRace();
-                this.initForm();
               });
             } else {
               this.getRace();
@@ -53,7 +52,7 @@ export class RaceEditComponent implements OnInit, OnDestroy {
   }
 
   private getRace() {
-    const race = this.raceService.getRace(this.id);
+    const race = this.raceService.getOne(this.id);
     this.raceName = race.name;
     this.raceDesc = race.description;
     this.raceInt = race.intelligence_mod;
@@ -63,7 +62,7 @@ export class RaceEditComponent implements OnInit, OnDestroy {
 
   onSubmit() {
     if (this.editMode) {
-      this.raceService.updateRace(this.id, this.raceForm.value)
+      this.raceService.updateOne(this.id, this.raceForm.value)
         .then(() => {
           this.router.navigate(['/races/' + this.id])
             .catch((error) => {
@@ -71,7 +70,7 @@ export class RaceEditComponent implements OnInit, OnDestroy {
             });
         });
     } else {
-      this.raceService.addRace(this.raceForm.value)
+      this.raceService.addOne(this.raceForm.value)
         .then((result: Response) => {
           this.router.navigate(['/races/' + result.json()['_id']])
             .catch((error) => {
@@ -82,10 +81,17 @@ export class RaceEditComponent implements OnInit, OnDestroy {
   }
 
   onCancel() {
-    this.router.navigate(['/races/' + this.id])
-      .catch((error) => {
-        console.log(error);
-      });
+    if (this.editMode) {
+      this.router.navigate(['/races/' + this.id])
+        .catch((error) => {
+          console.log(error);
+        });
+    } else {
+      this.router.navigate(['/races/'])
+        .catch((error) => {
+          console.log(error);
+        });
+    }
   }
 
   private initForm() {
@@ -93,9 +99,27 @@ export class RaceEditComponent implements OnInit, OnDestroy {
     this.raceForm = new FormGroup({
       'name': new FormControl(this.raceName, Validators.required),
       'description': new FormControl(this.raceDesc, Validators.required),
-      'strength_mod': new FormControl(this.raceStr, [Validators.required, Validators.pattern(/^[1-9]+[0-9]*$/)]),
-      'agility_mod': new FormControl(this.raceAgi, [Validators.required, Validators.pattern(/^[1-9]+[0-9]*$/)]),
-      'intelligence_mod': new FormControl(this.raceInt, [Validators.required, Validators.pattern(/^[1-9]+[0-9]*$/)])
+      'strength_mod': new FormControl(this.raceStr,
+        [
+          Validators.required,
+          Validators.pattern(/^[0-9]*$/),
+          Validators.min(1),
+          Validators.max(10)
+        ]),
+      'agility_mod': new FormControl(this.raceAgi,
+        [
+          Validators.required,
+          Validators.pattern(/^[0-9]*$/),
+          Validators.min(1),
+          Validators.max(10)
+        ]),
+      'intelligence_mod': new FormControl(this.raceInt,
+        [
+          Validators.required,
+          Validators.pattern(/^[0-9]*$/),
+          Validators.min(1),
+          Validators.max(10)
+        ])
     });
   }
 

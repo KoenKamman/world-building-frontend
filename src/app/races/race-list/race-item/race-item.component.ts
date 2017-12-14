@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {Race} from '../../../shared/race.model';
+import {Race} from '../../../shared/models/race.model';
 
 @Component({
   selector: 'app-race-item',

@@ -1,6 +1,6 @@
 import {Component, OnInit, OnDestroy} from '@angular/core';
-import {Race} from '../../shared/race.model';
-import {RaceService} from '../../shared/race.service';
+import {Race} from '../../shared/models/race.model';
+import {RaceService} from '../../shared/services/race.service';
 import {ActivatedRoute, Params, Router} from '@angular/router';
 import {Subscription} from 'rxjs/Subscription';
 
@@ -23,12 +23,12 @@ export class RaceDetailComponent implements OnInit, OnDestroy {
     this.subscription = this.route.params
       .subscribe((params: Params) => {
         this.id = params['id'];
-        if (this.raceService.getRace(this.id) === undefined) {
-          this.raceService.racesChanged.subscribe(() => {
-            this.race = this.raceService.getRace(this.id);
+        if (this.raceService.getOne(this.id) === undefined) {
+          this.raceService.getChanged().subscribe(() => {
+            this.race = this.raceService.getOne(this.id);
           });
         } else {
-          this.race = this.raceService.getRace(this.id);
+          this.race = this.raceService.getOne(this.id);
         }
       });
   }
@@ -38,7 +38,7 @@ export class RaceDetailComponent implements OnInit, OnDestroy {
   }
 
   onDeleteRace() {
-    this.raceService.deleteRace(this.id, this.race);
+    this.raceService.deleteOne(this.id, this.race);
     this.router.navigate(['/races'])
       .catch((error) => {
         console.log(error);

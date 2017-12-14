@@ -1,54 +1,55 @@
 <form [formGroup]="raceForm" (ngSubmit)="onSubmit()">
-<div>
-  <div class="row">
-    <div class="col-xs-12">
-      <div class="pull-right">
-        <button type="submit" class="btn btn-success" [disabled]="!raceForm.valid">Save</button>
-        <button type="button" class="btn btn-danger" (click)="onCancel()">Cancel</button>
+  <div>
+    <div class="row">
+      <div class="col-xs-12">
+        <div class="pull-right">
+          <button type="submit" class="btn btn-success" [disabled]="!raceForm.valid">Save</button>
+          <button type="button" class="btn btn-danger" (click)="onCancel()">Cancel</button>
+        </div>
+      </div>
+    </div>
+    <hr>
+  </div>
+  <div class="content-block">
+    <div class="row">
+      <div class="col-xs-12">
+        <div class="form-group">
+          <label for="name">Name</label>
+          <input type="text" id="name" formControlName="name" class="form-control">
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-xs-12">
+        <div class="form-group">
+          <label for="description">Description</label>
+          <input type="text" id="description" formControlName="description" class="form-control">
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-xs-12">
+        <div class="form-group">
+          <label for="strength_mod">Strength Modifier</label>
+          <input type="text" id="strength_mod" formControlName="strength_mod" class="form-control">
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-xs-12">
+        <div class="form-group">
+          <label for="agility_mod">Agility Modifier</label>
+          <input type="text" id="agility_mod" formControlName="agility_mod" class="form-control">
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-xs-12">
+        <div class="form-group">
+          <label for="intelligence_mod">Intelligence Modifier</label>
+          <input type="text" id="intelligence_mod" formControlName="intelligence_mod" class="form-control">
+        </div>
       </div>
     </div>
   </div>
-  <hr>
-</div>
-<div class="content-block">
-  <div class="row">
-    <div class="col-xs-12">
-      <div class="form-group">
-        <label for="name">Name</label>
-        <input type="text" id="name" formControlName="name" class="form-control">
-      </div>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-xs-12">
-      <div class="form-group">
-        <label for="description">Description</label>
-        <input type="text" id="description" formControlName="description" class="form-control">
-      </div>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-xs-12">
-      <div class="form-group">
-        <label for="strength_mod">Strength Modifier</label>
-        <input type="text" id="strength_mod" formControlName="strength_mod" class="form-control">
-      </div>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-xs-12">
-      <div class="form-group">
-        <label for="agility_mod">Agility Modifier</label>
-        <input type="text" id="agility_mod" formControlName="agility_mod" class="form-control">
-      </div>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-xs-12">
-      <div class="form-group">
-        <label for="intelligence_mod">Intelligence Modifier</label>
-        <input type="text" id="intelligence_mod" formControlName="intelligence_mod" class="form-control">
-      </div>
-    </div>
-  </div>
-</div>
+</form>

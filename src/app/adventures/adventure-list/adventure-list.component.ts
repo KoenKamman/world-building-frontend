@@ -1,8 +1,8 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {AdventureService} from '../../shared/adventure.service';
+import {AdventureService} from '../../shared/services/adventure.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {Subscription} from 'rxjs/Subscription';
-import {Adventure} from '../../shared/adventure.model';
+import {Adventure} from '../../shared/models/adventure.model';
 
 @Component({
   selector: 'app-adventure-list',
@@ -19,11 +19,11 @@ export class AdventureListComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.subscription = this.adventureService.adventuresChanged
+    this.subscription = this.adventureService.getChanged()
       .subscribe((adventures: Adventure[]) => {
         this.adventures = adventures;
       });
-    this.adventureService.getAdventures();
+    this.adventureService.getAll();
   }
 
   ngOnDestroy() {
