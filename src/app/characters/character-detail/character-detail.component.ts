@@ -40,7 +40,7 @@ export class CharacterDetailComponent implements OnInit, OnDestroy {
 
   onDeleteCharacter() {
     this.characterService.deleteOne(this.id, this.character);
-    this.router.navigate(['/races'])
+    this.router.navigate(['/characters'])
       .catch((error) => {
         console.log(error);
       });

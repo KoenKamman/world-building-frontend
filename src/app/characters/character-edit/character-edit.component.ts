@@ -5,7 +5,7 @@ import {ActivatedRoute, Params, Router} from '@angular/router';
 import {CharacterService} from '../../shared/services/character.service';
 import {Race} from '../../shared/models/race.model';
 import {RaceService} from '../../shared/services/race.service';
-import {Response} from "@angular/http";
+import {Response} from '@angular/http';
 
 @Component({
   selector: 'app-character-edit',
