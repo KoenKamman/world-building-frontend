@@ -9,15 +9,15 @@ import {Character} from '../models/character.model';
 export class CharacterService implements ResourceService {
   private headers = new Headers({'Content-Type': 'application/json'});
   private serverUrl = environment.serverUrl + '/characters';
-  private resourcesChanged = new Subject<Character[]>();
-  private resources: Character[] = [];
+  private charactersChanged = new Subject<Character[]>();
+  private characters: Character[] = [];
 
   constructor(private http: Http) {
   }
 
   setAll(characters: Character[]): void {
-    this.resources = characters;
-    this.resourcesChanged.next(this.resources.slice());
+    this.characters = characters;
+    this.charactersChanged.next(this.characters.slice());
   }
 
   getAll(): void {
@@ -33,13 +33,13 @@ export class CharacterService implements ResourceService {
   }
 
   getChanged(): Subject<Character[]> {
-    return this.resourcesChanged;
+    return this.charactersChanged;
   }
 
   getOne(index: string): Character {
-    for (let i = 0, charactersLength = this.resources.length; i < charactersLength; i++) {
-      if (this.resources[i]['_id'] === index) {
-        return this.resources[i];
+    for (let i = 0, charactersLength = this.characters.length; i < charactersLength; i++) {
+      if (this.characters[i]['_id'] === index) {
+        return this.characters[i];
       }
     }
     return undefined;
@@ -49,8 +49,8 @@ export class CharacterService implements ResourceService {
     this.http.delete(this.serverUrl + '/' + id, {headers: this.headers})
       .toPromise()
       .then((result: Response) => {
-        this.resources.splice(this.resources.indexOf(character), 1);
-        this.setAll(this.resources);
+        this.characters.splice(this.characters.indexOf(character), 1);
+        this.setAll(this.characters);
         console.log('Deleted character with MongoID: ' + id);
         return result;
       })
@@ -59,12 +59,12 @@ export class CharacterService implements ResourceService {
       });
   }
 
-  addOne(character: Character): Promise {
+  addOne(character: Character): Promise<Object> {
     return this.http.post(this.serverUrl, character, {headers: this.headers})
       .toPromise()
       .then((result) => {
-        this.resources.push(result.json());
-        this.setAll(this.resources);
+        this.characters.push(result.json());
+        this.setAll(this.characters);
         console.log('Created character with MongoID: ' + result.json()._id);
         return result;
       })
@@ -73,12 +73,12 @@ export class CharacterService implements ResourceService {
       });
   }
 
-  updateOne(id: string, character: Character): Promise {
+  updateOne(id: string, character: Character): Promise<Object> {
     return this.http.put(this.serverUrl + '/' + id, character, {headers: this.headers})
       .toPromise()
       .then((result) => {
-        this.resources[this.resources.indexOf(this.getOne(id))] = result.json();
-        this.setAll(this.resources);
+        this.characters[this.characters.indexOf(this.getOne(id))] = result.json();
+        this.setAll(this.characters);
         console.log('Updated character with MongoID: ' + result.json()._id);
       })
       .catch((error) => {

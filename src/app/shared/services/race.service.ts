@@ -9,15 +9,15 @@ import {Headers} from '@angular/http';
 export class RaceService implements ResourceService {
   private headers = new Headers({'Content-Type': 'application/json'});
   private serverUrl = environment.serverUrl + '/races';
-  private resourcesChanged = new Subject<Race[]>();
-  private resources: Race[] = [];
+  private racesChanged = new Subject<Race[]>();
+  private races: Race[] = [];
 
   constructor(private http: Http) {
   }
 
   setAll(races: Race[]): void {
-    this.resources = races;
-    this.resourcesChanged.next(this.resources.slice());
+    this.races = races;
+    this.racesChanged.next(this.races.slice());
   }
 
   getAll(): void  {
@@ -33,24 +33,24 @@ export class RaceService implements ResourceService {
   }
 
   getOne(index: string): Race {
-    for (let i = 0, racesLength = this.resources.length; i < racesLength; i++) {
-      if (this.resources[i]['_id'] === index) {
-        return this.resources[i];
+    for (let i = 0, racesLength = this.races.length; i < racesLength; i++) {
+      if (this.races[i]['_id'] === index) {
+        return this.races[i];
       }
     }
     return undefined;
   }
 
   getChanged(): Subject<Race[]> {
-    return this.resourcesChanged;
+    return this.racesChanged;
   }
 
   deleteOne(id: string, race: Race): void {
     this.http.delete(this.serverUrl + '/' + id, {headers: this.headers})
       .toPromise()
       .then((result: Response) => {
-        this.resources.splice(this.resources.indexOf(race), 1);
-        this.setAll(this.resources);
+        this.races.splice(this.races.indexOf(race), 1);
+        this.setAll(this.races);
         console.log('Deleted race with MongoID: ' + id);
         return result;
       })
@@ -59,12 +59,12 @@ export class RaceService implements ResourceService {
       });
   }
 
-  addOne(race: Race): Promise {
+  addOne(race: Race): Promise<Object> {
     return this.http.post(this.serverUrl, race, {headers: this.headers})
       .toPromise()
       .then((result) => {
-        this.resources.push(result.json());
-        this.setAll(this.resources);
+        this.races.push(result.json());
+        this.setAll(this.races);
         console.log('Created race with MongoID: ' + result.json()._id);
         return result;
       })
@@ -73,12 +73,12 @@ export class RaceService implements ResourceService {
       });
   }
 
-  updateOne(id: string, race: Race): Promise {
+  updateOne(id: string, race: Race): Promise<Object> {
     return this.http.put(this.serverUrl + '/' + id, race, {headers: this.headers})
       .toPromise()
       .then((result) => {
-        this.resources[this.resources.indexOf(this.getOne(id))] = result.json();
-        this.setAll(this.resources);
+        this.races[this.races.indexOf(this.getOne(id))] = result.json();
+        this.setAll(this.races);
         console.log('Updated race with MongoID: ' + result.json()._id);
       })
       .catch((error) => {

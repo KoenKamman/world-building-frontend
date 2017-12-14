@@ -9,15 +9,15 @@ import {Adventure} from '../models/adventure.model';
 export class AdventureService implements ResourceService {
   private headers = new Headers({'Content-Type': 'application/json'});
   private serverUrl = environment.serverUrl + '/adventures';
-  private resourcesChanged = new Subject<Adventure[]>();
-  private resources: Adventure[] = [];
+  private adventuresChanged = new Subject<Adventure[]>();
+  private adventures: Adventure[] = [];
 
   constructor(private http: Http) {
   }
 
   setAll(adventures: Adventure[]): void {
-    this.resources = adventures;
-    this.resourcesChanged.next(this.resources.slice());
+    this.adventures = adventures;
+    this.adventuresChanged.next(this.adventures.slice());
   }
 
   getAll(): void {
@@ -33,24 +33,24 @@ export class AdventureService implements ResourceService {
   }
 
   getOne(index: string): Adventure {
-    for (let i = 0, adventuresLength = this.resources.length; i < adventuresLength; i++) {
-      if (this.resources[i]['_id'] === index) {
-        return this.resources[i];
+    for (let i = 0, adventuresLength = this.adventures.length; i < adventuresLength; i++) {
+      if (this.adventures[i]['_id'] === index) {
+        return this.adventures[i];
       }
     }
     return undefined;
   }
 
   getChanged(): Subject<Adventure[]> {
-    return this.resourcesChanged;
+    return this.adventuresChanged;
 }
 
   deleteOne(id: string, adventure: Adventure): void {
     this.http.delete(this.serverUrl + '/' + id, {headers: this.headers})
       .toPromise()
       .then((result: Response) => {
-        this.resources.splice(this.resources.indexOf(adventure), 1);
-        this.setAll(this.resources);
+        this.adventures.splice(this.adventures.indexOf(adventure), 1);
+        this.setAll(this.adventures);
         console.log('Deleted adventure with MongoID: ' + id);
         return result;
       })
@@ -59,12 +59,12 @@ export class AdventureService implements ResourceService {
       });
   }
 
-  addOne(adventure: Adventure): Promise {
+  addOne(adventure: Adventure): Promise<Object> {
     return this.http.post(this.serverUrl, adventure, {headers: this.headers})
       .toPromise()
       .then((result) => {
-        this.resources.push(result.json());
-        this.setAll(this.resources);
+        this.adventures.push(result.json());
+        this.setAll(this.adventures);
         console.log('Created adventure with MongoID: ' + result.json()._id);
         return result;
       })
@@ -73,12 +73,12 @@ export class AdventureService implements ResourceService {
       });
   }
 
-  updateOne(id: string, adventure: Adventure): Promise {
+  updateOne(id: string, adventure: Adventure): Promise<Object> {
     return this.http.put(this.serverUrl + '/' + id, adventure, {headers: this.headers})
       .toPromise()
       .then((result) => {
-        this.resources[this.resources.indexOf(this.getOne(id))] = result.json();
-        this.setAll(this.resources);
+        this.adventures[this.adventures.indexOf(this.getOne(id))] = result.json();
+        this.setAll(this.adventures);
         console.log('Updated adventure with MongoID: ' + result.json()._id);
       })
       .catch((error) => {
