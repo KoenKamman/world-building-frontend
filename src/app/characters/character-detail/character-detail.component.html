@@ -1,0 +1,53 @@
+<div *ngIf="character !== undefined">
+  <div class="row">
+    <div class="col-xs-12">
+      <div class="pull-right">
+        <button class="btn btn-warning" (click)="onEditCharacter()">Edit</button>
+        <button class="btn btn-danger" (click)="onDeleteCharacter()">Delete</button>
+      </div>
+    </div>
+  </div>
+  <hr>
+  <div class="content-block">
+    <div class="row">
+      <div class="col-xs-12">
+        <h1>{{ character.name }}</h1>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-xs-12">
+        <p>{{ character.description }}</p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-xs-12">
+        <p>Race: <a *ngIf="character.race !== null" [routerLink]="['../../races/' + character.race['_id']]">{{ character.race.name }}</a></p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-xs-12">
+        <p>Experience: {{ character.experience }}</p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-xs-12">
+        <p>Level: {{ character.level }}</p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-xs-12">
+        <p>Strength: {{ character.strength }}</p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-xs-12">
+        <p>Agility: {{ character.agility }}</p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-xs-12">
+        <p>Intelligence: {{ character.intelligence }}</p>
+      </div>
+    </div>
+  </div>
+</div>

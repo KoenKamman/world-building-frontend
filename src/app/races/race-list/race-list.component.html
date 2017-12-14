@@ -1,0 +1,12 @@
+<div class="row">
+  <div class="col-xs-12">
+    <button class="btn btn-primary" (click)="onNewRace()">Add</button>
+  </div>
+</div>
+<hr>
+<div class="row">
+  <div class="col-xs-12">
+    <app-race-item *ngFor="let raceEl of races; let i = index" [race]="raceEl" [index]="i"></app-race-item>
+  </div>
+</div>
+

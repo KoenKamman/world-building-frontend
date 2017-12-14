@@ -1,0 +1,33 @@
+<div *ngIf="adventure !== undefined">
+  <div class="row">
+    <div class="col-xs-12">
+      <div class="pull-right">
+        <button class="btn btn-warning" (click)="onEditAdventure()">Edit</button>
+        <button class="btn btn-danger" (click)="onDeleteAdventure()">Delete</button>
+      </div>
+    </div>
+  </div>
+  <hr>
+  <div class="content-block">
+    <div class="row">
+      <div class="col-xs-12">
+        <h1>{{ adventure.name }}</h1>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-xs-12">
+        <p>{{ adventure.description }}</p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-xs-12">
+        <p>Experience gain: {{ adventure.experience_gain }}</p>
+      </div>
+    </div>
+    <div class="row" *ngFor="let charEl of adventure.characters; let i = index">
+      <div class="col-xs-12">
+        <p>Character {{i+1}}: <a [routerLink]="['../../characters/' + charEl['_id']]">{{ charEl.name }}</a></p>
+      </div>
+    </div>
+  </div>
+</div>

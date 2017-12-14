@@ -1,0 +1,52 @@
+<form [formGroup]="characterForm" (ngSubmit)="onSubmit()">
+  <div>
+    <div class="row">
+      <div class="col-xs-12">
+        <div class="pull-right">
+          <button type="submit" class="btn btn-success" [disabled]="!characterForm.valid">Save</button>
+          <button type="button" class="btn btn-danger" (click)="onCancel()">Cancel</button>
+        </div>
+      </div>
+    </div>
+    <hr>
+  </div>
+  <div class="content-block">
+    <div class="row">
+      <div class="col-xs-12">
+        <div class="form-group">
+          <label for="name">Name</label>
+          <input type="text" id="name" formControlName="name" class="form-control">
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-xs-12">
+        <div class="form-group">
+          <label for="description">Description</label>
+          <input type="text" id="description" formControlName="description" class="form-control">
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-xs-12">
+        <div class="form-group">
+          <label for="experience">Experience</label>
+          <input type="text" id="experience" formControlName="experience" class="form-control">
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-xs-12">
+        <!--<div class="form-group">-->
+          <label>Race</label>
+          <select [(ngModel)]="characterRace" [ngModelOptions]="{standalone: true}" (ngModelChange)="onChange($event)">
+            <option *ngFor="let raceEl of races" [ngValue]="raceEl"> {{raceEl.name}} </option>
+          </select>
+          <!--<select id="race" formControlName="race" class="form-control" (change)="onSelect($event.target.value)">-->
+            <!--<option *ngFor="let raceEl of races" [value]="raceEl['_id']">{{raceEl.name}}</option>-->
+          <!--</select>-->
+        <!--</div>-->
+      </div>
+    </div>
+  </div>
+</form>
