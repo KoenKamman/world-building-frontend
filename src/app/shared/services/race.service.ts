@@ -59,7 +59,7 @@ export class RaceService implements ResourceService {
       });
   }
 
-  addOne(race: Race): Promise<void | Response> {
+  addOne(race: Race) {
     return this.http.post(this.serverUrl, race, {headers: this.headers})
       .toPromise()
       .then((result) => {
@@ -73,7 +73,7 @@ export class RaceService implements ResourceService {
       });
   }
 
-  updateOne(id: string, race: Race): Promise<void> {
+  updateOne(id: string, race: Race) {
     return this.http.put(this.serverUrl + '/' + id, race, {headers: this.headers})
       .toPromise()
       .then((result) => {

@@ -5,6 +5,6 @@ interface ResourceService {
   // getChanged(): Subject<Array>;
   getChanged();
   deleteOne(id: string, resource: Object): void;
-  addOne(resource: Object): Promise<void | Response>;
-  updateOne(id: string, resource: Object): Promise<void>;
+  addOne(resource: Object);
+  updateOne(id: string, resource: Object);
 }
