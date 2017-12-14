@@ -66,7 +66,7 @@ export class CharacterService implements ResourceService {
         this.characters.push(result.json());
         this.setAll(this.characters);
         console.log('Created character with MongoID: ' + result.json()._id);
-        return result;
+        return result.json();
       })
       .catch((error) => {
         console.log(error);
